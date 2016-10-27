@@ -2,8 +2,6 @@
 import UIKit
 import Foundation
 
-
-
 class NotebookRecord {
     let date: Date
     var name: String?
@@ -19,12 +17,25 @@ class NotebookRecord {
     
     
     func fullDescriotion() -> String {
+        var str = ""
+        str += "\(self.date)"
         
-        let name = self.name ?? ""
-        let tag = self.tags ?? Set<String>()
-        let text = self.text ?? ""
+        if let name = self.name {
+            str += "\n" + name
+        }
         
-        return "\(date) \n \(name) \n \(tag) \n  \(text)"
+        if let tags = self.tags {
+            str += "\n"
+            for i in tags {
+                str += " [\(i)] "
+            }
+        }
+        
+        if let text = self.text {
+            str += "\n \(text)"
+        }
+        
+        return str
     }
 }
 
@@ -33,11 +44,14 @@ class NotebookRecord {
 
 
 //так чомусь не працює ?? не розумію в чому справа
-let date1 = Calendar.date(from: DateComponents(year: 2016, month: 10, day: 27))
+//let date1 = Calendar.date(from: DateComponents(year: 2016, month: 10, day: 27))
 
-let date = Date()
+//var y: Int? = 5
+//var datee = Calendar.date(from: DateComponents(year: 2016, month: 10, day: 26))
 
-let obj1 = NotebookRecord(name: "Wednesday", text: "But, unfortunately, I'm very tired", tags: ["#newstart", "#fun", "#letsdosomething"] )
+//let date = Date()
+
+let obj1 = NotebookRecord(name: "Wednesday", text: "Unfortunately, I'm tired", tags: ["#newstart", "#fun", "#letsdosomething"] )
 let obj2 = NotebookRecord()
 let obj3 = NotebookRecord(name: "Thursday")
 let obj4 = NotebookRecord(text: "Here's no other fields except date")
