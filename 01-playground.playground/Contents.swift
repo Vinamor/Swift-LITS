@@ -1,4 +1,3 @@
-
 import UIKit
 import Foundation
 
@@ -38,18 +37,6 @@ class NotebookRecord {
         return str
     }
 }
-
-
-//public func date(from components: DateComponents) -> Date?
-
-
-//так чомусь не працює ?? не розумію в чому справа
-//let date1 = Calendar.date(from: DateComponents(year: 2016, month: 10, day: 27))
-
-//var y: Int? = 5
-//var datee = Calendar.date(from: DateComponents(year: 2016, month: 10, day: 26))
-
-//let date = Date()
 
 let obj1 = NotebookRecord(name: "Wednesday", text: "Unfortunately, I'm tired", tags: ["#newstart", "#fun", "#letsdosomething"] )
 let obj2 = NotebookRecord()
