@@ -10,11 +10,10 @@ class NotebookRecord {
     var tags: Set<String>?
     
 
-    /*
+
     init(date: Date) {
         self.date = date
     }
- */
     
     init(date: Date, name: String?, text: String?, tags: Set<String>?) {
         self.date = date
@@ -25,13 +24,11 @@ class NotebookRecord {
     
     
     func fullDescriotion() -> String {
-        if let name = self.name, let tags = self.tags, let text = self.text
-        {
+         let name = self.name ?? ""
+         let tags = self.tags ?? Set<String>()
+         let text = self.text  ?? ""
+        
         return "\(date) \n \(name) \n \(tags) \n  \(text)"
-        }
-        else{
-            return "\(date)"
-        }
     }
 }
 
@@ -40,10 +37,16 @@ class NotebookRecord {
 
 let date = Date()
 
-var obj1 = NotebookRecord(date: date, name: "Wednesday", text: "But, unfortunately, I'm very tired", tags: ["#newstart", "#fun", "#letsdosomething"] )
-var obj2 = NotebookRecord(date: date, name: nil, text: nil, tags: nil)
-//var obj3 = NotebookRecord(date: date)
+let obj1 = NotebookRecord(date: date, name: "Wednesday", text: "But, unfortunately, I'm very tired", tags: ["#newstart", "#fun", "#letsdosomething"] )
+let obj2 = NotebookRecord(date: date, name: nil, text: nil, tags: nil)
+let obj3 = NotebookRecord(date: date, name: "Thursday", text: nil, tags: nil)
+let obj4 = NotebookRecord(date: date, name: nil, text: "Here's no other fields except date", tags: nil)
+let obj5 = NotebookRecord(date: date)
+
 
 
 obj1.fullDescriotion()
 obj2.fullDescriotion()
+obj3.fullDescriotion()
+obj4.fullDescriotion()
+obj5.fullDescriotion()
