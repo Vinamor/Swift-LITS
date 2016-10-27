@@ -7,7 +7,7 @@ class NotebookRecord {
     var text: String?
     var tags: Set<String>?
     
-    init(name: String? = nil, text: String? = nil, tags: Set<String>? = nil) {
+    init(date: Date, name: String? = nil, text: String? = nil, tags: Set<String>? = nil) {
         self.date = Date()
         self.name = name
         self.text = text
@@ -38,13 +38,19 @@ class NotebookRecord {
     }
 }
 
-let obj1 = NotebookRecord(name: "Wednesday", text: "Unfortunately, I'm tired", tags: ["#newstart", "#fun", "#letsdosomething"] )
-let obj2 = NotebookRecord()
-let obj3 = NotebookRecord(name: "Thursday")
-let obj4 = NotebookRecord(text: "Here's no other fields except date")
-let obj5 = NotebookRecord(name: "Friday", tags: ["#horrayFriday", "#therestisclose"] )
-let obj6 = NotebookRecord(tags: ["#fun", "#enjoy your day"])
-let obj7 = NotebookRecord(text: "Hi, everybody")
+
+
+let date = Calendar.current.date(from: DateComponents(year: 2016, month: 10, day:27))!
+    
+
+
+let obj1 = NotebookRecord(date: date, name: "Wednesday", text: "Unfortunately, I'm tired", tags: ["#newstart", "#fun", "#letsdosomething"] )
+let obj2 = NotebookRecord(date: date)
+let obj3 = NotebookRecord(date: date, name: "Thursday")
+let obj4 = NotebookRecord(date: date, text: "Here's no other fields except date")
+let obj5 = NotebookRecord(date: date, name: "Friday", tags: ["#horrayFriday", "#therestisclose"] )
+let obj6 = NotebookRecord(date: date, tags: ["#fun", "#enjoy your day"])
+let obj7 = NotebookRecord(date: date, text: "Hi, everybody")
 
 
 obj1.fullDescriotion()
