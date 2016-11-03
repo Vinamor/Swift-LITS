@@ -12,7 +12,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Properties
    // @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var chooseWeather: UISegmentedControl!
+    @IBOutlet weak var chooseWeather: UISegmentedControl?
     @IBOutlet weak var nameTextField1: UITextField!
     @IBOutlet weak var nameTextField2: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
@@ -78,7 +78,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 let text2 = nameTextField2.text ?? ""
                 let weather = chooseWeather?.selectedSegmentIndex
             
-            note = TheNote(date: date, name: text1, text: text2, weather: weather!)
+            note = TheNote(date: date, name: text1, text: text2, weather: weather)
             }
 
         }
@@ -91,15 +91,20 @@ class ViewController: UIViewController, UITextFieldDelegate {
         nameTextField1.delegate = self
         nameTextField2.delegate = self
         
-       
+       /*
             if let note = note {
             navigationItem.title = String(describing: note.date)
             nameTextField1.text = note.name
             nameTextField2.text = note.text
-            chooseWeather?.selectedSegmentIndex = note.weather
+            chooseWeather?.selectedSegmentIndex = note.weather!
         }
-        
-        
+        */
+        if let note = note, let weath = note.weather {
+            navigationItem.title = String(describing: note.date)
+            nameTextField1.text = note.name
+            nameTextField2.text = note.text
+            chooseWeather?.selectedSegmentIndex = weath
+        }
         
         checkValidNoteName()
     }

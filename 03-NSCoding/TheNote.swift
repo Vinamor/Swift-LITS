@@ -11,7 +11,7 @@ class TheNote: NSObject, NSCoding {
     let date: Date
     var name: String?
     var text: String?
-    var weather: Int
+    var weather: Int?
 //var tags: Set<String>?
     
     // MARK: Archiving Paths
@@ -29,7 +29,7 @@ class TheNote: NSObject, NSCoding {
         static let weatherKey = "weather"
     }
 
-    init(date: Date, name: String? = nil, text: String? = nil, weather: Int = 0) {
+    init(date: Date, name: String? = nil, text: String? = nil, weather: Int? = nil) {
         self.date = date
         self.name = name
         self.text = text
@@ -72,13 +72,15 @@ func fullDescriotion() -> String {
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
+        
         let date = aDecoder.decodeObject(forKey: PropertyKey.dateKey) as! Date
         let name = aDecoder.decodeObject(forKey: PropertyKey.nameKey) as? String
         let text = aDecoder.decodeObject(forKey: PropertyKey.textKey) as? String
-        let weather = aDecoder.decodeObject(forKey: PropertyKey.weatherKey) as! Int
+        let weather = aDecoder.decodeObject(forKey: PropertyKey.weatherKey) as? Int
         
         self.init(date: date, name: name, text: text, weather: weather)
-        
+       
+            
     }
     
 }
