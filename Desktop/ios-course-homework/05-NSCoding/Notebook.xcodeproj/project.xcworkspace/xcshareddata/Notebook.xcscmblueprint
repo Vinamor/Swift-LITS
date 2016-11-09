@@ -1,0 +1,51 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "5108F9C0DD23A7883FC5F3CF9C591C9EC6DE8D11+++BE61530",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "5108F9C0DD23A7883FC5F3CF9C591C9EC6DE8D11+++BE61530" : 9223372036854775807,
+    "370CAF2DFC02B11AC55A0B359F41AFD358F75752+++557F6B2" : 9223372036854775807,
+    "370CAF2DFC02B11AC55A0B359F41AFD358F75752+++0D3FB1B" : 9223372036854775807,
+    "5108F9C0DD23A7883FC5F3CF9C591C9EC6DE8D11+++55F76DC" : 9223372036854775807,
+    "370CAF2DFC02B11AC55A0B359F41AFD358F75752+++A14BB53" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "BC874F33-8669-4E75-9851-97D4503A253B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "5108F9C0DD23A7883FC5F3CF9C591C9EC6DE8D11+++BE61530" : "04-NSCoding\/",
+    "370CAF2DFC02B11AC55A0B359F41AFD358F75752+++557F6B2" : "",
+    "370CAF2DFC02B11AC55A0B359F41AFD358F75752+++0D3FB1B" : "..",
+    "5108F9C0DD23A7883FC5F3CF9C591C9EC6DE8D11+++55F76DC" : "03-NSCoding\/",
+    "370CAF2DFC02B11AC55A0B359F41AFD358F75752+++A14BB53" : ".."
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Notebook",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Notebook.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Vinamor\/Swift-LITS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "370CAF2DFC02B11AC55A0B359F41AFD358F75752+++0D3FB1B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Vinamor\/ios-course-homework.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "370CAF2DFC02B11AC55A0B359F41AFD358F75752+++557F6B2"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Vinamor\/ios-corse-homework.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "370CAF2DFC02B11AC55A0B359F41AFD358F75752+++A14BB53"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Vinamor\/02-storyboards.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5108F9C0DD23A7883FC5F3CF9C591C9EC6DE8D11+++55F76DC"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Vinamor\/02-storyboards.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5108F9C0DD23A7883FC5F3CF9C591C9EC6DE8D11+++BE61530"
+    }
+  ]
+}
