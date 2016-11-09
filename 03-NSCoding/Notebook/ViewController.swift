@@ -74,6 +74,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
        
          if (saveButton != nil) {
                 let date = Calendar.current.date(from: DateComponents(year: 2016, month: 11, day: 3 + 1))!
+                //let date2 = Calendar.autoupdatingCurrent
                 let text1 = nameTextField1.text ?? ""
                 let text2 = nameTextField2.text ?? ""
                 let weather = chooseWeather?.selectedSegmentIndex

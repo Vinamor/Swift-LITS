@@ -29,7 +29,7 @@ class TheNote: NSObject, NSCoding {
         static let weatherKey = "weather"
     }
 
-    init(date: Date, name: String? = nil, text: String? = nil, weather: Int? = nil) {
+     init(date: Date, name: String? = nil, text: String? = nil, weather: Int? = nil) {
         self.date = date
         self.name = name
         self.text = text
@@ -83,4 +83,50 @@ func fullDescriotion() -> String {
             
     }
     
+    func getDateHumanReadable() -> String {
+    
+        let now = Date()
+        let components = userCalendar.dateComponents([.day], from: date, to: now)
+        let formatter = DateFormatter()
+        formatter.locale = myLocale
+        
+        // сьогодні
+        if let day = components.day, day==0  {
+            formatter.setLocalizedDateFormatFromTemplate("hh:mm")
+            return formatter.string(from: date)
+        }
+        // вчора
+        if let day = components.day, day==1  {
+            return "Вчора"
+        }
+        // цього тижня
+        if let day = components.day, day<=6  {
+            formatter.setLocalizedDateFormatFromTemplate("EEEE")
+            return formatter.string(from: date)
+        }
+        
+        // давно
+        formatter.setLocalizedDateFormatFromTemplate("dd MMMM yyyy")
+        return formatter.string(from: date)
+        
+        
+    }
+    
+}
+
+let userCalendar = Calendar.current
+let myLocale = Locale(identifier: "uk_UA")
+
+func entryDate(_ dateInString:String)->Date {
+    
+    let datemaker = DateFormatter()
+    datemaker.calendar = userCalendar
+    datemaker.dateFormat = "yyyy/MM/dd hh:mm"
+    datemaker.locale = myLocale
+    
+    if let dateEntry = datemaker.date(from: dateInString) {
+        return dateEntry
+    } else {
+        return Date()
+    }
 }

@@ -30,6 +30,7 @@ loadSampleNotes()
 
     func loadSampleNotes() {
         let date = Calendar.current.date(from: DateComponents(year: 2016, month: 11, day: 3 + 1))
+     
         let note1 = TheNote(date: date!, name: "Monday", text: "The Beginning", weather: 1)
         let note2 = TheNote(date: date!, name: "Tuesday", text:"The ardestDay", weather: 2)
         let note3 = TheNote(date: date!, name: "Wednesday", text: "The Other Hard Day", weather: 3)
