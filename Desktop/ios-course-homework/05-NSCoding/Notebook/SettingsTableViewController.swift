@@ -9,6 +9,7 @@
 import UIKit
 
 class SettingsTableViewController: UITableViewController {
+     
     @IBOutlet weak var nameLabel1: UILabel!
     @IBOutlet weak var nameLabel2: UILabel!
     @IBAction func switchNaturalLanguageSupport(_ sender: UISwitch) {
@@ -16,9 +17,11 @@ class SettingsTableViewController: UITableViewController {
     
     @IBOutlet weak var checkDateAndTime: UITableViewCell!
     @IBOutlet weak var checkDateOnly: UITableViewCell!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -34,15 +37,15 @@ class SettingsTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 2
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return section == 0 ? 2 : 1
-    }
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        // #warning Incomplete implementation, return the number of sections
+//        return 2
+//    }
+//
+//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        // #warning Incomplete implementation, return the number of rows
+//        return section == 0 ? 2 : 1
+//    }
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

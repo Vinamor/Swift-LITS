@@ -73,15 +73,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        
       //   if (saveButton != nil) {
-                let date = Calendar.current.date(from: DateComponents(year: 2016, month: 11, day: 3 + 1))!
-                //let date2 = Calendar.autoupdatingCurrent
+                //let date = Calendar.current.date(from: DateComponents(year: 2016, month: 11, day: 3 + 1))!
+             //   let currentDate = String(describing: Calendar.current.date(from: DateComponents()))
+                let date = entryDate("2016/11/16 20:45")
+        
                 let text1 = nameTextField1.text ?? ""
                 let text2 = nameTextField2.text ?? ""
                 let weather = chooseWeather?.selectedSegmentIndex
-            
-            note = TheNote(date: date, name: text1, text: text2, weather: weather)
-   //         }
-
+        
+      
+        note = TheNote(date: date, name: text1, text: text2, weather: weather)
         }
     
     

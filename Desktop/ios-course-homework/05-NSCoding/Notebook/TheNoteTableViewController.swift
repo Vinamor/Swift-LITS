@@ -9,18 +9,50 @@
 import UIKit
 
 class TheNoteTableViewController: UITableViewController {
+    
+    @IBOutlet weak var weatherFilter: UISegmentedControl?
+    
+    func filterTableByDate(notes: [TheNote]) -> [TheNote] {
+    return notes.sorted { (s1, s2) -> Bool in
+            return s1.date > s2.date
+        }
+    }
+    
+    func filterTableByWeather( notes: inout [TheNote]) {
+        
+        for (i, val) in notes.enumerated() {
+        if weatherFilter?.selectedSegmentIndex == val.weather {
+            notes[i] = val
+            }
+        }
+    }
+    
     // MARK: Properties
     var notes = [TheNote]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+      
+        
         // Loading  samples of Notes
         if let savedNotes = loadNotes() {
+            
+            notes = filterTableByDate(notes: notes)
+            
             notes += savedNotes
+            
+            filterTableByWeather(notes: &notes)
+           
         } else {
+            
             loadSampleNotes()
+            
+              filterTableByWeather(notes: &notes)
         }
+        
+          filterTableByWeather(notes: &notes)
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -29,13 +61,13 @@ class TheNoteTableViewController: UITableViewController {
     }
 
     func loadSampleNotes() {
-   //     let date = Calendar.current.date(from: DateComponents(year: 2016, month: 11, day: 3 + 1))
+        let date = entryDate("2016/10/12 11:50")
      
-   //     let note1 = TheNote(date: date!, name: "Monday", text: "The Beginning", weather: 1)
-   //     let note2 = TheNote(date: date!, name: "Tuesday", text:"The ardestDay", weather: 2)
-   //     let note3 = TheNote(date: date!, name: "Wednesday", text: "The Other Hard Day", weather: 3)
+        let note1 = TheNote(date: date, name: "Monday", text: "The Beginning", weather: 1)
+        let note2 = TheNote(date: date, name: "Tuesday", text:"The ardestDay", weather: 2)
+        let note3 = TheNote(date: date, name: "Wednesday", text: "The Other Hard Day", weather: 3)
         
-   //     notes += [note1, note2, note3]
+        notes += [note1, note2, note3]
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,7 +86,6 @@ class TheNoteTableViewController: UITableViewController {
         return notes.count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cellIdentifier = "TheNoteTableViewCell"
@@ -67,11 +98,9 @@ class TheNoteTableViewController: UITableViewController {
         cell.nameLabel2?.text = String(describing: note.date)
         cell.nameLabel3?.text = note.name
         cell.nameLabel4?.text = String(describing: note.date)
-
+        
         return cell
     }
-    
-
     
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -79,8 +108,6 @@ class TheNoteTableViewController: UITableViewController {
         return true
     }
 
-
-    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -113,6 +140,7 @@ class TheNoteTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       
         if segue.identifier == "ShowDetail" {
             let noteDetailViewController = segue.destination as! ViewController
             
@@ -121,14 +149,11 @@ class TheNoteTableViewController: UITableViewController {
                 let selectedNote = notes[indexPath.row]
                 noteDetailViewController.note = selectedNote
             }
-        }
-        else if segue.identifier == "AddItem" {
+        } else if segue.identifier == "AddItem" {
             print("Adding new note")
-            
         }
     }
     
-
     @IBAction func unwindToTheNoteList(sender: UIStoryboardSegue) {
         
         if let sourceViewController = sender.source as? ViewController, let note = sourceViewController.note {
@@ -143,10 +168,9 @@ class TheNoteTableViewController: UITableViewController {
                 
             let newIndexPath = NSIndexPath(row: notes.count, section: 0)
                 
-            notes.append(note)
+                notes.append(note)
                 
             tableView.insertRows(at: [newIndexPath as IndexPath], with: .bottom)
-                
             }
             
             saveNotes()
@@ -162,7 +186,7 @@ class TheNoteTableViewController: UITableViewController {
     }
     
     func loadNotes() -> [TheNote]? {
+        
         return NSKeyedUnarchiver.unarchiveObject(withFile: TheNote.ArchiveURL.path) as? [TheNote]
+        }
     }
-    
-}

@@ -7,7 +7,9 @@
 //
 
 import UIKit
+
 class TheNote: NSObject, NSCoding {
+    
     let date: Date
     var name: String?
     var text: String?
@@ -29,7 +31,9 @@ class TheNote: NSObject, NSCoding {
         static let weatherKey = "weather"
     }
 
-     init(date: Date, name: String? = nil, text: String? = nil, weather: Int? = nil) {
+    init(date: Date, name: String? = nil, text: String? = nil, weather: Int? = nil) {
+      //  let currentDate = String(describing: Calendar.current.date(from: DateComponents()))
+        let date = entryDate("2016/11/16 14:55")
         self.date = date
         self.name = name
         self.text = text
@@ -37,11 +41,10 @@ class TheNote: NSObject, NSCoding {
       
         super.init()
         
-    //self.tags = tags
-}
+    }
 
 
-func fullDescriotion() -> String {
+    func fullDescriotion() -> String {
     var str = ""
     str += "\(self.date)"
     
@@ -100,7 +103,7 @@ func fullDescriotion() -> String {
             return "Вчора"
         }
         // цього тижня
-        if let day = components.day, day<=6  {
+        if let day = components.day, day <= 6  {
             formatter.setLocalizedDateFormatFromTemplate("EEEE")
             return formatter.string(from: date)
         }
@@ -108,16 +111,14 @@ func fullDescriotion() -> String {
         // давно
         formatter.setLocalizedDateFormatFromTemplate("dd MMMM yyyy")
         return formatter.string(from: date)
-        
-        
-    }
+        }
     
-}
+    }
 
-let userCalendar = Calendar.current
-let myLocale = Locale(identifier: "uk_UA")
+    let userCalendar = Calendar.current
+    let myLocale = Locale(identifier: "uk_UA")
 
-func entryDate(_ dateInString:String)->Date {
+    func entryDate(_ dateInString:String) -> Date {
     
     let datemaker = DateFormatter()
     datemaker.calendar = userCalendar
@@ -128,5 +129,18 @@ func entryDate(_ dateInString:String)->Date {
         return dateEntry
     } else {
         return Date()
+        }
     }
-}
+
+    func recordDate(date:Date)->String{
+    
+    let datemaker = DateFormatter()
+    datemaker.calendar = userCalendar
+    datemaker.dateFormat = "yyyy/MM/dd hh:mm"
+    datemaker.locale = myLocale
+    
+    return datemaker.string(from: date)
+    
+    }
+
+
