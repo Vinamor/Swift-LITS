@@ -9,9 +9,20 @@
 import UIKit
 
 class BalanceTableViewController: UITableViewController {
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        let isPresentingInAddMealMode = presentingViewController is UINavigationController
+        
+        if isPresentingInAddMealMode {
+            dismiss(animated: true, completion: nil)
+        }
+        else {
+            navigationController!.popViewController(animated: true)
+        }
+    }
 
     var notes = [TheReportNote]()
     
+ 
     func loadSampleNotes() {
         let date = Calendar.current.date(from: DateComponents(year: 2016, month: 10, day: 22))
         let note1 = TheReportNote(date: date, sum: 1200)
@@ -25,7 +36,14 @@ class BalanceTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        loadSampleNotes()
+        
+        if let savedNotes = loadNotes() {
+            notes += savedNotes
+        } else {
+            // Load the sample data.
+            loadSampleNotes()
+        }
+       
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -61,15 +79,17 @@ class BalanceTableViewController: UITableViewController {
         // Configure the cell...
         let note = notes[indexPath.row]
         
-        cell.theDateLabel.text = String(describing: note.date)
-        cell.theSumLabel.text = String(describing: note.sum)
+        if let nD = note.date, let nS = note.sum {
+        
+        cell.theDateLabel.text = String(describing: nD)
+        cell.theSumLabel.text = String(describing: nS)
         
         navigationItem.title = String(describing: balance(array: &notes))
-        
+        }
         return cell
     }
     
-    func balance( array: inout [TheReportNote]) -> Decimal {
+      func balance( array: inout [TheReportNote]) -> Decimal {
          var sum: Decimal = 0
         
         for i in array {
@@ -95,6 +115,7 @@ class BalanceTableViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             notes.remove(at: indexPath.row)
+            saveNotes()
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -150,6 +171,18 @@ class BalanceTableViewController: UITableViewController {
                 notes.append(note)
                 tableView.insertRows(at: [newIndexPath as IndexPath], with: .bottom)
             }
+            saveNotes()
         }
+    }
+    // MARK: NSCoding
+    func saveNotes() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(notes, toFile: TheReportNote.ArchieveURL!.path)
+        if !isSuccessfulSave {
+            print("Failed to save list of notes...")
+        }
+    }
+    
+    func loadNotes() -> [TheReportNote]? {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: TheReportNote.ArchieveURL!.path) as? [TheReportNote]
     }
 }

@@ -11,7 +11,7 @@ import UIKit
 class PartnerInfoTableViewController: UITableViewController, UITextFieldDelegate {
     
     @IBOutlet weak var PartnerImage: UIImageView?
-    @IBOutlet weak var PartnerNameSurname: UITextField?
+    @IBOutlet weak var PartnerNameSurname: UITextField!
     @IBOutlet weak var PartnerMobileNumber: UITextField?
     @IBOutlet weak var PartnerEmail: UITextField?
     @IBOutlet weak var PartnerBalance: UILabel?
@@ -42,21 +42,41 @@ class PartnerInfoTableViewController: UITableViewController, UITextFieldDelegate
 //    }
     
     var partner: ThePartnerInfo?
+    var note: TheReportNote?
+    var arrayOfPartersNotes : [TheReportNote] = []
+    
+    func balance( array: inout [TheReportNote]) -> Decimal {
+        var sum: Decimal = 0
+        
+        for i in array {
+            if let summ = i.sum {
+                
+                sum += summ
+            }
+        }
+        return sum
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        PartnerNameSurname?.delegate = self
-        PartnerMobileNumber?.delegate = self
-        PartnerEmail?.delegate = self
+//        PartnerNameSurname?.delegate = self
+//        PartnerMobileNumber?.delegate = self
+//        PartnerEmail?.delegate = self
         
-        if let partner = partner {
+        let  cb = balance(array: &arrayOfPartersNotes)
+        
+        
+        if let partner = partner, let pN = partner.name, let pS = partner.surname, let pI = partner.photo, let pMN = partner.mobileNumber, let pE = partner.email {
             
-            PartnerNameSurname?.text   = partner.name
-            PartnerImage?.image = partner.photo
-            PartnerMobileNumber?.text = String(describing: partner.mobileNumber)
-            PartnerEmail?.text = partner.email
-            PartnerBalance?.text = String(describing: partner.currentBalance)
+            //let partnerBalance = partnerNote?.note?.sum
+            
+            PartnerNameSurname.text = pN + " " + pS
+            PartnerImage?.image = pI
+            PartnerMobileNumber?.text = pMN
+            PartnerEmail?.text = pE
+           // PartnerBalance?.text = String(describing: partner.currentBalance)
+            PartnerBalance?.text = String(describing: cb)
         }
 
         // Uncomment the following line to preserve selection between presentations
@@ -137,12 +157,13 @@ class PartnerInfoTableViewController: UITableViewController, UITextFieldDelegate
         // Pass the selected object to the new view controller.
         
             let photo = PartnerImage?.image
+        
             let nameSurname = PartnerNameSurname?.text ?? ""
-            let mobile: Int? = (Int)((PartnerMobileNumber?.text)!) ?? 0
+            let mobile = PartnerMobileNumber?.text ?? " "
             let email = PartnerEmail?.text ?? ""
             let balance: Int? = (Int)((PartnerBalance?.text)!) ?? 0
-            let balance2: Decimal? = (Decimal)(balance!)
+            let balance2: Decimal = (Decimal)(balance!)
         
-        partner = ThePartnerInfo(photo: photo, name: nameSurname, surname: nameSurname, mobileNumber: mobile, email: email, currentBalance: balance2)
+        partner = ThePartnerInfo(photo: photo, name: nameSurname, surname: "", mobileNumber: mobile, email: email, currentBalance: balance2)
     }
 }

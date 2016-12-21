@@ -17,9 +17,9 @@ class ListOfPartners2TableViewController: UITableViewController {
         let photo1 = UIImage(named: "Image-1")!
         let photo2 = UIImage(named: "Image-4")!
         let photo3 = UIImage(named: "Image-3")!
-        let partner1 = ThePartnerInfo(photo: photo1, name: "Andrew", surname: "kibalnikov", mobileNumber: 0931526815, email: "romanivost@gmail.com", currentBalance: -1200.20)
-        let partner2 = ThePartnerInfo(photo: photo2, name: "Max", surname: "Opirskyy", mobileNumber: 0931901947, email: "maher@gmail.com", currentBalance: -2500.20)
-        let partner3 = ThePartnerInfo(photo: photo3, name: "Roman", surname: "Saveljev", mobileNumber: 0931576916, email: "romanivmarta@gmail.com", currentBalance: -3600.55)
+        let partner1 = ThePartnerInfo(photo: photo1, name: "Andrew", surname: "Kibalnikov", mobileNumber: "0931526815", email: "romanivost@gmail.com", currentBalance: -1200.20)
+        let partner2 = ThePartnerInfo(photo: photo2, name: "Max", surname: "Opirskyy", mobileNumber: "0931901947", email: "maher@gmail.com", currentBalance: -2500.20)
+        let partner3 = ThePartnerInfo(photo: photo3, name: "Roman", surname: "Saveljev", mobileNumber: "0931576916", email: "romanivmarta@gmail.com", currentBalance: -3600.55)
         
         partners += [partner1, partner2, partner3]
     }
@@ -27,7 +27,12 @@ class ListOfPartners2TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadSamplePartners()
+        if let savedPartners = loadPartners() {
+            partners += savedPartners
+        } else {
+            // Load the sample data.
+            loadSamplePartners()
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -74,9 +79,12 @@ class ListOfPartners2TableViewController: UITableViewController {
 //        }
 //        return cell
         
-        cell.PartnerImage2?.image = partner.photo
-        cell.PartnerNameSurname2?.text = String(describing: partner.name) + String(describing: " ") + String(describing: partner.surname)
-        cell.PartnerBalance2?.text = String(describing: partner.currentBalance)
+        if let pI = partner.photo, let pN = partner.name, let pS = partner.surname, let pB = partner.currentBalance {
+            
+            cell.PartnerImage2?.image = pI
+            cell.PartnerNameSurname2?.text = pN + " " + pS
+            cell.PartnerBalance2?.text = String(describing: pB)
+        }
         
         return cell
     }
@@ -96,6 +104,7 @@ class ListOfPartners2TableViewController: UITableViewController {
      if editingStyle == .delete {
      // Delete the row from the data source
         partners.remove(at: indexPath.row)
+        savePartners()
      tableView.deleteRows(at: [indexPath], with: .fade)
      } else if editingStyle == .insert {
      // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -152,8 +161,19 @@ class ListOfPartners2TableViewController: UITableViewController {
                 partners.append(partner)
                 tableView.insertRows(at: [newIndexPath as IndexPath], with: .bottom)
             }
+            savePartners()
         }
     }
-}
     
-
+    // MARK: NSCoding
+    func savePartners() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(partners, toFile: ThePartnerInfo.ArchieveURL!.path)
+        if !isSuccessfulSave {
+            print("Failed to save list of partners...")
+        }
+    }
+    
+    func loadPartners() -> [ThePartnerInfo]? {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: ThePartnerInfo.ArchieveURL!.path) as? [ThePartnerInfo]
+    }
+}

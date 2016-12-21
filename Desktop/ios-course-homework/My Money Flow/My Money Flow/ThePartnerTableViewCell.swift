@@ -14,13 +14,15 @@ class ThePartnerTableViewCell: UITableViewCell {
     @IBOutlet weak var PartnerBalance: UILabel?
     @IBOutlet weak var PartnerImage: UIImageView?
     
-    
     @IBOutlet weak var PartnerNameSurname2: UILabel?
-    @IBOutlet weak var PartnerBalance2: UILabel?
     @IBOutlet weak var PartnerImage2: UIImageView?
+    @IBOutlet weak var PartnerBalance2: UILabel!
+ 
+
   
     
     override func awakeFromNib() {
+    
         super.awakeFromNib()
         // Initialization code
     }

@@ -12,17 +12,18 @@ class ThePartnerInfo: NSObject, NSCoding {
     let photo: UIImage?
     let name: String?
     let surname: String?
-    let mobileNumber: Int?
+    let mobileNumber: String?
     let email: String?
     let currentBalance: Decimal?
     
-    init(photo: UIImage? = nil,name: String? = nil, surname: String? = nil, mobileNumber: Int? = nil, email: String? = nil, currentBalance: Decimal? = nil) {
+    init(photo: UIImage? = nil,name: String? = nil, surname: String? = nil, mobileNumber: String? = nil, email: String? = nil, currentBalance: Decimal? = nil) {
+        let currBal: TheReportNote? = TheReportNote()
         self.photo = photo
         self.name = name
         self.surname = surname
         self.mobileNumber = mobileNumber
         self.email = email
-        self.currentBalance = currentBalance
+        self.currentBalance = currBal?.sum
         
         super.init()
     }
@@ -52,7 +53,7 @@ class ThePartnerInfo: NSObject, NSCoding {
         let photo = aDecoder.decodeObject(forKey: PropertyKey.photoKey) as? UIImage
         let name = aDecoder.decodeObject(forKey: PropertyKey.nameKey) as? String
         let surname = aDecoder.decodeObject(forKey: PropertyKey.surnameKey) as? String
-        let mobileNumber = aDecoder.decodeObject(forKey: PropertyKey.mobileNumberKey) as? Int
+        let mobileNumber = aDecoder.decodeObject(forKey: PropertyKey.mobileNumberKey) as? String
         let email = aDecoder.decodeObject(forKey: PropertyKey.emailKey) as? String
         let currentBalance = aDecoder.decodeObject(forKey: PropertyKey.currentBalanceKey) as? Decimal
         

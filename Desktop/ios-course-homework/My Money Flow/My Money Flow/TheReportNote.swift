@@ -20,6 +20,10 @@ class TheReportNote: NSObject, NSCoding {
         super.init()
     }
     
+    static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first
+    static let ArchieveURL = DocumentsDirectory?.appendingPathComponent("notes")
+
+    
     struct PropertyKey {
         static let dateKey = "date"
         static let sumKey = "sum"

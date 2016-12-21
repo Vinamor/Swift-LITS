@@ -12,8 +12,6 @@ class BalanceViewController: UIViewController {
     
     var note: TheReportNote?
     
-    
-    
     @IBOutlet weak var theSumTextField: UITextField?
     @IBOutlet weak var theDatePicker: UIDatePicker?
     
@@ -47,10 +45,10 @@ class BalanceViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        if let note = note {
+        if let note = note, let nS = note.sum, let nD = note.date {
             
-            theSumTextField?.text = String(describing: note.sum)
-            theDatePicker?.date = note.date!
+            theSumTextField?.text = String(describing: nS)
+            theDatePicker?.date = nD
         }
         
     }
